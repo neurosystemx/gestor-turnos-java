@@ -7,13 +7,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 // importar controladores!
 import com.gestorturnos.controller.EspecialidadController;
 
 import com.gestorturnos.controller.PacienteController;
-
+import com.gestorturnos.controller.TurnoController;
+import com.gestorturnos.Turno.EstadoTurno;
 import com.gestorturnos.controller.DoctorController;
+
+
 
 
 /**
@@ -47,6 +51,214 @@ public class App extends Application {
         
 
 
+    // test de turnos y turnoController
+
+    TurnoController turnoController = new TurnoController();
+
+        // Especialidades
+        Especialidad espCardiologia = new Especialidad("Cardiología");
+        Especialidad espTraumatologia = new Especialidad("Traumatología");
+        Especialidad espDermatologia = new Especialidad("Dermatología");
+
+        // Doctores (4 doctores, 2 con misma especialidad)
+        Doctor doc1 = new Doctor("Dr. Carlos López", "pass123", "carlos.lopez@clinica.com", espCardiologia);
+        Doctor doc2 = new Doctor("Dra. Miriam Torres", "pass123", "miriam.torres@clinica.com", espCardiologia);
+        Doctor doc3 = new Doctor("Dr. Roberto Sánchez", "pass123", "roberto.sanchez@clinica.com", espTraumatologia);
+        Doctor doc4 = new Doctor("Dra. Julia Fernández", "pass123", "julia.fernandez@clinica.com", espDermatologia);
+
+        // Pacientes
+        Paciente pac1 = new Paciente("Juan Pérez", "abc123", "juan@correo.com", "30111222", "1160001111");
+        Paciente pac2 = new Paciente("Ana García", "abc123", "ana@correo.com", "28999444", "1155552222");
+        Paciente pac3 = new Paciente("Carlos Ruiz", "abc123", "carlos@correo.com", "27222111", "1144447777");
+        Paciente pac4 = new Paciente("Laura Díaz", "abc123", "laura@correo.com", "29555111", "1188883333");
+
+        // Fechas de turnos
+        LocalDateTime fecha1 = LocalDateTime.of(2025, 12, 1, 10, 30);
+        LocalDateTime fecha2 = LocalDateTime.of(2025, 12, 1, 11, 30);
+
+        // Crear turnos
+        Turno turno1 = new Turno(100, doc1, pac1, EstadoTurno.PENDIENTE, fecha1);
+        Turno turno2 = new Turno(101, doc2, pac2, EstadoTurno.PENDIENTE, fecha2);
+
+        // Agregar turnos
+        turnoController.agregarTurno(turno1);
+        turnoController.agregarTurno(turno2);
+
+        // Mostrar todos los turnos
+        System.out.println("=== Turnos cargados ===");
+        for (Turno t : turnoController.getTurnos()) {
+            System.out.println(t);
+        }
+
+        // Confirmar turno1
+        turnoController.confirmarTurno(turno1);
+        System.out.println("\n=== Turno 1 confirmado ===");
+        System.out.println(turno1);
+
+        // Cancelar turno2
+        turnoController.cancelarTurno(turno2);
+        System.out.println("\n=== Turno 2 cancelado ===");
+        System.out.println(turno2);
+
+        // Borrar turno2
+        turnoController.borrarTurno(turno2);
+        System.out.println("\n=== Turnos luego de borrar turno 2 ===");
+        for (Turno t : turnoController.getTurnos()) {
+            System.out.println(t);
+        }
+
+        // Turnos por doctor
+        System.out.println("\n=== Turnos del Dr. Carlos López ===");
+        for (Turno t : turnoController.getTurnosPorDoctor(doc1)) {
+            System.out.println(t);
+        }
+
+        // Turnos por paciente
+        System.out.println("\n=== Turnos del paciente Ana García ===");
+        for (Turno t : turnoController.getTurnosPorPaciente(pac2)) {
+            System.out.println(t);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // test de Turnos
+
+    /*
+
+    // Especialidades
+        Especialidad espCardiologia = new Especialidad("Cardiología");   // compartida
+        Especialidad espTraumatologia = new Especialidad("Traumatología");
+        Especialidad espDermatologia = new Especialidad("Dermatología");
+
+        // Doctores (4 doctores, 2 con misma especialidad)
+        Doctor doc1 = new Doctor("Dr. Carlos López", "pass123", "carlos.lopez@clinica.com", espCardiologia);
+        Doctor doc2 = new Doctor("Dra. Miriam Torres", "pass123", "miriam.torres@clinica.com", espCardiologia);
+        Doctor doc3 = new Doctor("Dr. Roberto Sánchez", "pass123", "roberto.sanchez@clinica.com", espTraumatologia);
+        Doctor doc4 = new Doctor("Dra. Julia Fernández", "pass123", "julia.fernandez@clinica.com", espDermatologia);
+
+        // Pacientes (4 pacientes)
+        Paciente pac1 = new Paciente("Juan Pérez", "abc123", "juan@correo.com", "30111222", "1160001111");
+        Paciente pac2 = new Paciente("Ana García", "abc123", "ana@correo.com", "28999444", "1155552222");
+        Paciente pac3 = new Paciente("Carlos Ruiz", "abc123", "carlos@correo.com", "27222111", "1144447777");
+        Paciente pac4 = new Paciente("Laura Díaz", "abc123", "laura@correo.com", "29555111", "1188883333");
+
+        // Fecha de los turnos
+        LocalDateTime fechaTurno = LocalDateTime.of(2025, 12, 1, 10, 30);
+
+        // Turno 1 (pendiente)
+        Turno turno1 = new Turno(
+                100,
+                doc1,
+                pac1,
+                EstadoTurno.PENDIENTE,
+                fechaTurno
+        );
+
+        System.out.println("=== Turno recién creado ===");
+        System.out.println(turno1);
+
+        // Confirmar turno 1
+        turno1.setEstado(EstadoTurno.CONFIRMADO);
+        System.out.println("\n=== Turno confirmado ===");
+        System.out.println(turno1);
+
+        // Marcar como atendido
+        turno1.setEstado(EstadoTurno.ATENDIDO);
+        System.out.println("\n=== Turno atendido ===");
+        System.out.println(turno1);
+
+        // Turno 2 (cancelado)
+        LocalDateTime otraFecha = fechaTurno.plusHours(1);
+        Turno turno2 = new Turno(
+                101,
+                doc2,
+                pac2,
+                EstadoTurno.CANCELADO,
+                otraFecha
+        );
+
+        System.out.println("\n=== Segundo turno (cancelado) ===");
+        System.out.println(turno2);
+
+        // Especialidades disponibles
+        System.out.println("\n=== Especialidades ===");
+        System.out.println(espCardiologia.getNombre());
+        System.out.println(espTraumatologia.getNombre());
+        System.out.println(espDermatologia.getNombre());
+
+        // Doctores creados
+        System.out.println("\n=== Doctores ===");
+        System.out.println(doc1.getNombre() + " → " + doc1.getEspecialidad().getNombre());
+        System.out.println(doc2.getNombre() + " → " + doc2.getEspecialidad().getNombre());
+        System.out.println(doc3.getNombre() + " → " + doc3.getEspecialidad().getNombre());
+        System.out.println(doc4.getNombre() + " → " + doc4.getEspecialidad().getNombre());
+
+        // Pacientes cargados
+        System.out.println("\n=== Pacientes ===");
+        System.out.println(pac1.getNombre());
+        System.out.println(pac2.getNombre());
+        System.out.println(pac3.getNombre());
+        System.out.println(pac4.getNombre());
+
+        */
 
 
 
@@ -99,9 +311,8 @@ public class App extends Application {
 
     // test de doctor + DoctorController
 
-
+    /*
     
-
     DoctorController doctorController = new DoctorController();
 
 
@@ -174,7 +385,7 @@ public class App extends Application {
         doctorController.listarDoctores();
     
         
-
+        */
 
 
    

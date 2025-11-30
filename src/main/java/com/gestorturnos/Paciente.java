@@ -7,8 +7,7 @@ public class Paciente extends Usuario {
     
     private static int contadorIds = 1; // autoincremental para los ids. arranca en 1
 
-    public Paciente(String nombre, String password, String correo,
-                    String dni, String telefono) {
+    public Paciente(String nombre, String password, String correo, String dni, String telefono) {
 
         super(contadorIds++, nombre, password, correo);
 

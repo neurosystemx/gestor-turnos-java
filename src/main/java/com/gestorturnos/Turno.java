@@ -7,16 +7,22 @@ public class Turno {
 
     public enum EstadoTurno {PENDIENTE,CONFIRMADO,ATENDIDO,AUSENTE,CANCELADO}
 
+    private static int contadorIds = 1; // autoincremental para los ids. arranca en  1
+
     private int id;
+
+
     private Doctor doctorAsignado;
     private Paciente paciente;
     private EstadoTurno estado;       // PENDIENTE (default), CONFIRMADO, ATENDIDO, AUSENTE, CANCELADO
     private LocalDateTime fecha;         // fecha y hora del turno
 
     // constructor
-    public Turno(int id,Doctor doctorAsignado,Paciente paciente,EstadoTurno estado,LocalDateTime fecha) {
 
-        this.id = id;
+    // fix, el constructor no lleva id.
+    public Turno(Doctor doctorAsignado,Paciente paciente,EstadoTurno estado,LocalDateTime fecha) {
+
+        this.id = contadorIds++;
         this.doctorAsignado = doctorAsignado;
         this.paciente = paciente;
         this.estado = estado;

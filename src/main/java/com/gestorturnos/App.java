@@ -48,8 +48,59 @@ public class App extends Application {
     public static void main(String[] args) {
 
     //    launch();
-        
+      
+    
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
 
     // test de turnos y turnoController
 
@@ -119,62 +170,7 @@ public class App extends Application {
             System.out.println(t);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    */    
 
 
 

@@ -4,4 +4,10 @@ module com.gestorturnos {
 
     opens com.gestorturnos to javafx.fxml;
     exports com.gestorturnos;
+
+    //fix para pantallas
+
+    opens com.gestorturnos.controller to javafx.fxml;
+
+
 }

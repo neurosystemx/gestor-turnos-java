@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.gestorturnos.controller.GestionarTurnosController">
+
+    <!-- TOP: Filtros -->
+    <top>
+        <HBox spacing="10" style="-fx-padding: 10;">
+            <children>
+
+                <Label text="Doctor:"/>
+                <ComboBox fx:id="comboDoctor" prefWidth="200"/>
+
+                <Label text="Fecha:"/>
+                <DatePicker fx:id="datePickerFecha"/>
+
+                <Button text="Cargar Agenda" onAction="#onCargarAgenda"/>
+
+            </children>
+        </HBox>
+    </top>
+
+    <!-- CENTER: Tabla de turnos -->
+    <center>
+        <TableView fx:id="tablaTurnos">
+            <columns>
+
+                <TableColumn fx:id="colHora" text="Hora" prefWidth="150"/>
+                <TableColumn fx:id="colPaciente" text="Paciente" prefWidth="200"/>
+                <TableColumn fx:id="colEstado" text="Estado" prefWidth="120"/>
+
+            </columns>
+        </TableView>
+    </center>
+
+    <!-- BOTTOM: Botones -->
+    <bottom>
+        <HBox spacing="10" style="-fx-padding: 10;">
+            <children>
+
+                <Button text="Reservar Turno" onAction="#onReservarTurno"/>
+                <Button text="Cancelar Turno" onAction="#onCancelarTurno"/>
+                <Button text="Volver" onAction="#onVolver"/>
+
+            </children>
+        </HBox>
+    </bottom>
+
+</BorderPane>

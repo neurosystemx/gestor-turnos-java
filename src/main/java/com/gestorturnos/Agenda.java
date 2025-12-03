@@ -48,9 +48,9 @@ public class Agenda {
         this.turnosDelDia = generarTurnosDelDia();
     }
 
-    // ==================
+
     // Métodos privados
-    // ==================
+
 
     /**
      * Genera la lista de turnos del día, con horarios fijos cada 30 minutos.

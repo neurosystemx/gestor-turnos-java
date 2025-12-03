@@ -7,7 +7,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 // importar controladores!
 import com.gestorturnos.controller.EspecialidadController;
@@ -49,7 +53,11 @@ public class App extends Application {
 
     //    launch();
 
+
+
+    CargaDatos test1 = new CargaDatos();
     
+    test1.cargarDatos();
 
 
 
@@ -71,6 +79,121 @@ public class App extends Application {
 
 
 
+
+
+
+
+
+
+
+    // datos de la aplicación NO SACAR
+
+
+
+
+    /*
+     // Especialidades
+        Especialidad espCardiologia = new Especialidad("Cardiología");
+        Especialidad espTraumatologia = new Especialidad("Traumatología");
+        Especialidad espDermatologia = new Especialidad("Dermatología");
+
+        // Doctores (4 doctores, 2 con misma especialidad)
+        Doctor doc1 = new Doctor("Dr. Carlos López", "pass123", "carlos.lopez@clinica.com", espCardiologia);
+        Doctor doc2 = new Doctor("Dra. Miriam Torres", "pass123", "miriam.torres@clinica.com", espCardiologia);
+        Doctor doc3 = new Doctor("Dr. Roberto Sánchez", "pass123", "roberto.sanchez@clinica.com", espTraumatologia);
+        Doctor doc4 = new Doctor("Dra. Julia Fernández", "pass123", "julia.fernandez@clinica.com", espDermatologia);
+
+        // Pacientes
+        Paciente pac1 = new Paciente("Juan Pérez", "abc123", "juan@correo.com", "30111222", "1160001111");
+        Paciente pac2 = new Paciente("Ana García", "abc123", "ana@correo.com", "28999444", "1155552222");
+        Paciente pac3 = new Paciente("Carlos Ruiz", "abc123", "carlos@correo.com", "27222111", "1144447777");
+        Paciente pac4 = new Paciente("Laura Díaz", "abc123", "laura@correo.com", "29555111", "1188883333");
+
+
+        
+
+        Doctor doctorElegido = doc1;
+        LocalDate fechaHoy   = LocalDate.now();
+
+        // Crear agenda del doctor para hoy
+        Agenda agenda = new Agenda(doctorElegido, fechaHoy);
+
+        System.out.println("==============================================");
+        System.out.println("Turnos iniciales del " + doctorElegido.getNombre());
+        System.out.println("Fecha: " + fechaHoy);
+        System.out.println("==============================================");
+
+
+        // esto muestra los turnos iniciales
+
+        for (Turno t : agenda.getTurnosDelDia()) {
+            System.out.println(t);
+        }
+
+        // reservar turno
+
+        LocalTime horaReserva = LocalTime.of(10, 0);
+        Paciente pacienteElegido = pac2; // Ana García
+
+
+        boolean reservaOK = agenda.reservarTurno(horaReserva, pacienteElegido);
+
+        System.out.println("\nIntentando reservar turno a las " + horaReserva +
+                " para " + pacienteElegido.getNombre() + ": " + reservaOK);
+
+
+        // 4) Mostrar turnos después de reservar
+        // =====================================================
+        System.out.println("\n===== Turnos después de reservar =====");
+
+        for (Turno t : agenda.getTurnosDelDia()) {
+            System.out.println(t);
+        }
+
+        // =====================================================
+        // 5) Cancelar el turno reservado
+        // =====================================================
+        boolean canceladoOK = agenda.cancelarTurno(horaReserva);
+
+        System.out.println("\nCancelando turno a las " + horaReserva + ": " + canceladoOK);
+
+        // =====================================================
+        // 6) Mostrar turnos finales
+        // =====================================================
+        System.out.println("\n===== Turnos finales =====");
+
+        for (Turno t : agenda.getTurnosDelDia()) {
+            System.out.println(t);
+        }
+
+
+
+        System.out.println("==============================================");
+        System.out.println("Solapamientos");
+        System.out.println("#############");
+        System.out.println("==============================================");
+
+
+        LocalTime horaTurno = LocalTime.of(11, 30);
+
+        boolean reserva1 = agenda.reservarTurno(horaTurno, pac1);
+
+        System.out.println("Reserva 1 (11:30 con Juan Pérez): " + reserva1);
+
+        // ===========================================
+        // 2) Intentar reservar el mismo turno con otro paciente
+        // ===========================================
+        boolean reserva2 = agenda.reservarTurno(horaTurno, pac2);
+
+        System.out.println("Reserva 2 (11:30 con Ana García): " + reserva2);
+
+        // ===========================================
+        // 3) Mostrar los 18 turnos después de ambos intentos
+        // ===========================================
+        System.out.println("\n=== Estado final de los turnos ===");
+
+        for (Turno t : agenda.getTurnosDelDia()) {
+            System.out.println(t);
 
 
 
@@ -88,6 +211,46 @@ public class App extends Application {
 
 
     /*
+
+
+
+    // Crear lista para turnos
+
+        List<Turno> turnos = new ArrayList<>();
+
+
+        // Crear Turnos MANUALMENTE
+
+        turnos.add(new Turno(doc1, pac1, Turno.EstadoTurno.PENDIENTE,
+                LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 0))));
+
+        turnos.add(new Turno(doc1, null, Turno.EstadoTurno.PENDIENTE,
+                LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 10))));
+
+        turnos.add(new Turno(doc3, pac1, Turno.EstadoTurno.CONFIRMADO,
+                LocalDateTime.of(LocalDate.now(), LocalTime.of(10, 0))));
+
+        turnos.add(new Turno(doc4, null, Turno.EstadoTurno.CANCELADO,
+                LocalDateTime.of(LocalDate.now(), LocalTime.of(10, 30))));
+
+        turnos.add(new Turno(doc2, pac1, Turno.EstadoTurno.ATENDIDO,
+                LocalDateTime.of(LocalDate.now(), LocalTime.of(11, 0))));
+
+
+        turnos.add(new Turno(doc1, null, Turno.EstadoTurno.PENDIENTE,
+                LocalDateTime.of(LocalDate.now(), LocalTime.of(9, 10))));
+                
+
+
+
+        System.out.println("========= TURNOS CREADOS =========");
+
+            for (Turno t : turnos) {
+            System.out.println(t);
+
+
+
+
 
     // test de turnos y turnoController
 
@@ -705,8 +868,8 @@ public class App extends Application {
 
 
 
-    }
-
+        }
 }
+
     
 

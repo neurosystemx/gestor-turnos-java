@@ -19,7 +19,8 @@ public class Turno {
 
     // constructor
 
-    // fix, el constructor no lleva id.
+    // fix, el constructor no lleva id (auto)
+
     public Turno(Doctor doctorAsignado,Paciente paciente,EstadoTurno estado,LocalDateTime fecha) {
 
         this.id = contadorIds++;
@@ -95,7 +96,7 @@ public class Turno {
     @Override
     public String toString() {
         return "Turno{" + "id=" + id +
-                ", doctor=" + (doctorAsignado != null ? doctorAsignado.getNombre() : "n/a") + ", paciente=" + (paciente != null ? paciente.getNombre() : "n/a") +
+            ", doctor=" + (doctorAsignado != null ? doctorAsignado.getNombre() : "n/a") + ", paciente=" + (paciente != null ? paciente.getNombre() : "n/a") +
                 ", estado=" + estado + ", fecha=" + fecha +'}';
     }
 }

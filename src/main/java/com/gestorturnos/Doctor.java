@@ -24,6 +24,7 @@ public class Doctor extends Usuario {
 
     // Getter
 
+
     public Especialidad getEspecialidad() {
         return especialidad;
     }
